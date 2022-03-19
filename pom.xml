@@ -16,7 +16,7 @@
 		<app.runtime>4.4.0-20211227</app.runtime>
 		<mule.maven.plugin.version>3.5.2</mule.maven.plugin.version>
 	</properties>
-
+	<!-- Original build element before Copado 
 	<build>
 		<plugins>
 			<plugin>
@@ -32,6 +32,36 @@
 			</plugin>
 		</plugins>
 	</build>
+	-->
+	<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-clean-plugin</artifactId>
+            <version>3.0.0</version>
+    	</plugin>
+    	<plugin>
+            <groupId>org.mule.tools.maven</groupId>
+            <artifactId>mule-maven-plugin</artifactId>
+            <version>${mule.maven.plugin.version}</version>
+            <extensions>true</extensions>
+            <configuration>
+    			<cloudHubDeployment>
+					<uri>https://anypoint.mulesoft.com</uri>
+					<muleVersion>${runtime_version}</muleVersion>
+					<connectedAppClientId>${clientid}</connectedAppClientId>
+					<connectedAppClientSecret>${clientsecret}</connectedAppClientSecret>
+					<connectedAppGrantType>client_credentials</connectedAppGrantType>
+					<applicationName>${appname}</applicationName>
+					<environment>${environment}</environment>
+					<workers>${workerCount}</workers>
+					<workerType>${workerType}</workerType>
+					<objectStoreV2>true</objectStoreV2>
+				</cloudHubDeployment>
+            </configuration>
+    	</plugin>
+    </plugins>
+</build>		
 
 	<dependencies>
 		<dependency>
